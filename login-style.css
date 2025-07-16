@@ -1,0 +1,145 @@
+/*-------------------- Global Styles --------------------*/
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+  min-height: 100vh;
+}
+
+/*-------------------- Navigation Bar --------------------*/
+.navbar {
+  width: 100%;
+  background: linear-gradient(90deg, #0d47a1, #1976d2);
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/*-------------------- Login Container --------------------*/
+.container {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin: 60px auto;
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: scale(1.02);
+}
+
+/*-------------------- Input Fields --------------------*/
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 92%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #1976d2;
+  outline: none;
+}
+
+/*-------------------- Button --------------------*/
+button {
+  width: 70%;
+  padding: 14px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #125ea5;
+  transform: translateY(-2px);
+}
+
+/*-------------------- Error Message --------------------*/
+.error-message {
+  color: #d32f2f;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/*-------------------- Dashboard Layout --------------------*/
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+}
+
+/*-------------------- Sidebar --------------------*/
+.sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  padding: 20px;
+  box-sizing: border-box;
+  color: white;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 16px;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 12px 16px;
+  color: #ecf0f1;
+  text-decoration: none;
+  background-color: #34495e;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: #3d5a73;
+}
+
+/*-------------------- Content --------------------*/
+.content {
+  flex-grow: 1;
+  padding: 30px;
+  background-color: #f8f9fa;
+  overflow-y: auto;
+}
