@@ -1,5 +1,5 @@
 // Hardcoded username and password
-const validUsername = "ppp";
+const validUsername = "Sanatancsc";
 const validPassword = "qwertyuiop";
 
 // Event listener for the login form submission
