@@ -34,7 +34,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     // 🚫 Mark site as blocked in localStorage
     function blockPermanently() {
         localStorage.setItem("blocked", "true");
-        window.location.replace("error/devtoolsdetected.html"); 
+        window.location.replace("devtoolsdetected"); 
     }
 
     // ✅ On every page load, check if already blocked
@@ -65,3 +65,4 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     // Disable right-click
     window.addEventListener("contextmenu", e => e.preventDefault());
 })();
+
