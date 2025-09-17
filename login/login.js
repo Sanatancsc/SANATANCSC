@@ -20,7 +20,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         sessionStorage.setItem("loginTime", Date.now());
 
         // ✅ Redirect to the dashboard after successful login
-        window.location.href = "/dashboard";
+        window.location.href = "dashboard";
     } else {
         // Show error message if credentials are incorrect
         document.getElementById("error-message").style.display = "block";
@@ -41,7 +41,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
                 clearInterval(checkInterval);
 
                 // Redirect to external error page
-                window.location.href = "/devtoolsdetected";
+                window.location.href = "devtoolsdetected";
             }
         } else {
             devtoolsOpened = false;
@@ -65,6 +65,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         }
     });
 })();
+
 
 
 
