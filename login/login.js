@@ -29,7 +29,6 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
 
 (function () {
     let devtoolsOpened = false;
-    let checkInterval;
 
     function checkDevTools() {
         const widthThreshold = window.outerWidth - window.innerWidth > 160;
@@ -38,10 +37,9 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         if (widthThreshold || heightThreshold) {
             if (!devtoolsOpened) {
                 devtoolsOpened = true;
-                clearInterval(checkInterval);
 
-                // Redirect to external error page
-                window.location.href = "devtoolsdetected";
+                // Redirect to error page (adjust path if needed)
+                window.location.href = "/error/devtoolsdetected";
             }
         } else {
             devtoolsOpened = false;
@@ -49,12 +47,19 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     }
 
     // Run check every 500ms
-    checkInterval = setInterval(checkDevTools, 500);
+    setInterval(checkDevTools, 500);
 
     // Disable right-click
     window.addEventListener("contextmenu", e => e.preventDefault());
+
+    // Disable common DevTools shortcuts
+    window.addEventListener("keydown", e => {
+        if (
+            e.key === "F12" ||
+            (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+            (e.ctrlKey && e.key.toLowerCase() === "u")
+        ) {
+            e.preventDefault();
         }
     });
 })();
-
-
