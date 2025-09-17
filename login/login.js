@@ -31,10 +31,10 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     let devtoolsOpened = false;
     let checkInterval;
 
-    // 🚫 Mark site as blocked in localStorage
-    function blockPermanently() {
+    // 🚫 Mark site as blocked in sessionStorage
+    function blockForSession() {
         sessionStorage.setItem("blocked", "true");
-        window.location.replace("devtoolsdetected"); 
+        window.location.replace("devtoolsdetected"); // make sure this file exists
     }
 
     // ✅ On every page load, check if already blocked
@@ -51,8 +51,8 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
                 devtoolsOpened = true;
                 clearInterval(checkInterval);
 
-                // 🚫 Redirect & block permanently
-                blockPermanently();
+                // 🚫 Redirect & block for session
+                blockForSession();
             }
         } else {
             devtoolsOpened = false;
@@ -65,6 +65,3 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     // Disable right-click
     window.addEventListener("contextmenu", e => e.preventDefault());
 })();
-
-
-
