@@ -31,12 +31,15 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     let devtoolsOpened = false;
     let checkInterval;
 
-    function blockSite() {
-        document.body.innerHTML = `
-            <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#f00;font-size:24px;font-family:sans-serif;text-align:center;">
-                🚫 Access Denied<br>Developer Tools detected!
-            </div>
-        `;
+    // 🚫 Mark site as blocked in localStorage
+    function blockPermanently() {
+        localStorage.setItem("blocked", "true");
+        window.location.replace("error/devtoolsdetected.html"); 
+    }
+
+    // ✅ On every page load, check if already blocked
+    if (localStorage.getItem("blocked") === "true") {
+        window.location.replace("error/devtoolsdetected.html");
     }
 
     function checkDevTools() {
@@ -48,8 +51,8 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
                 devtoolsOpened = true;
                 clearInterval(checkInterval);
 
-                // 🚫 Block the site permanently instead of redirect
-                blockSite();
+                // 🚫 Redirect & block permanently
+                blockPermanently();
             }
         } else {
             devtoolsOpened = false;
