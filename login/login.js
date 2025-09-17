@@ -39,7 +39,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
 
     // ✅ On every page load, check if already blocked
     if (localStorage.getItem("blocked") === "true") {
-        window.location.replace("error/devtoolsdetected.html");
+        window.location.replace("devtoolsdetected");
     }
 
     function checkDevTools() {
@@ -65,4 +65,5 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     // Disable right-click
     window.addEventListener("contextmenu", e => e.preventDefault());
 })();
+
 
