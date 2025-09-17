@@ -41,7 +41,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
                 clearInterval(checkInterval);
 
                 // Redirect to external error page
-                window.location.href = "devtoolsdetected";
+                window.location.href = "/devtoolsdetected";
             }
         } else {
             devtoolsOpened = false;
@@ -65,4 +65,5 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         }
     });
 })();
+
 
