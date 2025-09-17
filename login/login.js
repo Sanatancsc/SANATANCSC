@@ -53,9 +53,9 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
 
     // Disable right-click
     window.addEventListener("contextmenu", e => e.preventDefault());
-}
     });
 })();
+
 
 
 
