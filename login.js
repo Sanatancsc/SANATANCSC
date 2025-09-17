@@ -26,3 +26,42 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         document.getElementById("error-message").style.display = "block";
     }
 });
+
+(function () {
+    let devtoolsOpened = false;
+    let checkInterval;
+
+    function checkDevTools() {
+        const widthThreshold = window.outerWidth - window.innerWidth > 160;
+        const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+        if (widthThreshold || heightThreshold) {
+            if (!devtoolsOpened) {
+                devtoolsOpened = true;
+                clearInterval(checkInterval);
+
+                // Redirect to external error page
+                window.location.href = "Devtoolsdetected.html";
+            }
+        } else {
+            devtoolsOpened = false;
+        }
+    }
+
+    // Run check every 500ms
+    checkInterval = setInterval(checkDevTools, 500);
+
+    // Disable right-click
+    window.addEventListener("contextmenu", e => e.preventDefault());
+
+    // Disable common DevTools shortcuts
+    window.addEventListener("keydown", e => {
+        if (
+            e.key === "F12" ||
+            (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+            (e.ctrlKey && e.key.toLowerCase() === "u")
+        ) {
+            e.preventDefault();
+        }
+    });
+})();
