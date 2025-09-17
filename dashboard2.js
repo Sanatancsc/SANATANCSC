@@ -52,7 +52,7 @@ document.getElementById('familyIdFinder').addEventListener('click', function () 
 });
 
 document.getElementById('aadharLink').addEventListener('click', function () {
-    const url = 'https://fasal.haryana.gov.in/home/login';
+    const url = 'https://ekshatipurti.haryana.gov.in';
     window.open(url, '_blank');
 });
 
@@ -72,8 +72,9 @@ document.getElementById('merge').addEventListener('click', function () {
 });
 
 document.getElementById('FamilyUpdations').addEventListener('click', function () {
-    const url = 'https://ppp-office.haryana.gov.in/FamilyUpdations/FamilyUpdations';
-    window.open(url, '_blank');
+    const familyId = document.getElementById('familyIdInput').value;
+    const url = 'https://ppp-office.haryana.gov.in/familyupdations/SearchFamily?familyId={familyId}';
+    openUrlWithFamilyId(url, familyId);
 });
 
 document.getElementById('Father/Mother').addEventListener('click', function () {
