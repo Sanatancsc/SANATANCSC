@@ -31,6 +31,14 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     let devtoolsOpened = false;
     let checkInterval;
 
+    function blockSite() {
+        document.body.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#f00;font-size:24px;font-family:sans-serif;text-align:center;">
+                🚫 Access Denied<br>Developer Tools detected!
+            </div>
+        `;
+    }
+
     function checkDevTools() {
         const widthThreshold = window.outerWidth - window.innerWidth > 160;
         const heightThreshold = window.outerHeight - window.innerHeight > 160;
@@ -40,8 +48,8 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
                 devtoolsOpened = true;
                 clearInterval(checkInterval);
 
-                // Redirect to error page
-                window.location.href = "devtoolsdetected";
+                // 🚫 Block the site permanently instead of redirect
+                blockSite();
             }
         } else {
             devtoolsOpened = false;
@@ -54,4 +62,3 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     // Disable right-click
     window.addEventListener("contextmenu", e => e.preventDefault());
 })();
-
