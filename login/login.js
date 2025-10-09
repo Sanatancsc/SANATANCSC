@@ -32,13 +32,13 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     let checkInterval;
 
     // 🚫 Mark site as blocked in sessionStorage
-    function blockForSession() {
-        sessionStorage.setItem("blocked", "true");
+    function blockPermanently() {
+        localStorage.setItem("blocked", "true");
         window.location.replace("devtoolsdetected"); // make sure this file exists
     }
 
     // ✅ On every page load, check if already blocked
-    if (sessionStorage.getItem("blocked") === "true") {
+    if (localStorage.getItem("blocked") === "true") {
         window.location.replace("devtoolsdetected");
     }
 
@@ -52,7 +52,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
                 clearInterval(checkInterval);
 
                 // 🚫 Redirect & block for session
-                blockForSession();
+                blockPermanently();
             }
         } else {
             devtoolsOpened = false;
@@ -64,4 +64,16 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
 
     // Disable right-click
     window.addEventListener("contextmenu", e => e.preventDefault());
+
+    // Disable common DevTools shortcuts
+    window.addEventListener("keydown", e => {
+        if (
+            e.key === "F12" ||
+            (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+            (e.ctrlKey && e.key.toLowerCase() === "u")
+        ) {
+            e.preventDefault();
+        }
+    });
 })();
+
