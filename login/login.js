@@ -27,6 +27,15 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     }
 });
 
+// Detect floating DevTools (via console.log timing trick)
+  const element = new Image();
+  Object.defineProperty(element, 'id', {
+    get: function () {
+      blockPage();
+    }
+  });
+  console.log(element);
+
 (function () {
     let devtoolsOpened = false;
     let checkInterval;
@@ -76,5 +85,6 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         }
     });
 })();
+
 
 
