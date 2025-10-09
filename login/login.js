@@ -1,6 +1,6 @@
 // Hardcoded username and password
-const validUsername = "Sanatancsc";
-const validPassword = "qwertyuiop";
+const validUsername = "Vikash";
+const validPassword = "Vikash";
 
 // Event listener for the login form submission
 document.getElementById("loginForm").addEventListener("submit", function (event) {
@@ -76,4 +76,5 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         }
     });
 })();
+
 
