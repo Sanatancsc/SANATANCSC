@@ -27,15 +27,6 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     }
 });
 
-// Detect floating DevTools (via console.log timing trick)
-  const element = new Image();
-  Object.defineProperty(element, 'id', {
-    get: function () {
-      blockPage();
-    }
-  });
-  console.log(element);
-
 (function () {
     let devtoolsOpened = false;
     let checkInterval;
@@ -68,6 +59,15 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         }
     }
 
+    // Detect floating DevTools (console.log trick)
+    const element = new Image();
+    Object.defineProperty(element, 'id', {
+        get: function () {
+            blockPermanently();
+        }
+    });
+    console.log(element);
+
     // Run check every 500ms
     checkInterval = setInterval(checkDevTools, 500);
 
@@ -85,6 +85,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         }
     });
 })();
+
 
 
 
