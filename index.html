@@ -2,45 +2,36 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="login/login-style.css">
-  <title>Sanatan CSC Center Portal - Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login/login-style.css">
+    <title>Sanatan CSC Center Portal - Login</title>
 </head>
 
 <body>
-  <div class="navbar">
-    <h1>Sanatan CSC Center Portal - Login</h1>
-  </div>
-
-  <div class="container">
-    <h2>Login</h2>
-
-    <!-- Username/Password Login -->
-    <form id="loginForm">
-      <div class="input-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-      </div>
-      <div class="input-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-      </div>
-      <button type="submit">Login</button>
-      <p id="error-message" class="error-message" style="display: none;">Invalid credentials!</p>
-    </form>
-
-    <!-- OTP Section (hidden initially) -->
-    <div id="otpSection" style="display:none; margin-top:20px;">
-      <h3>Enter OTP received by Admin</h3>
-      <input type="text" id="otpInput" maxlength="6" placeholder="Enter OTP">
-      <button id="verifyOtp">Verify OTP</button>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h1>Sanatan CSC Center Portal - Login</h1>
     </div>
-  <!-- Your separate script -->
-  <script type="module" src="login/login.js"></script>
+        
+    <!-- Login Container -->
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p id="error-message" class="error-message" style="display: none;">Username या Password मे से कुछ गलत है|</p>
+        </form>
+    </div>
+
+    <script src="login/login.js"></script>
 </body>
 
 </html>
-
-
-
