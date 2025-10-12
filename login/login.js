@@ -1,76 +1,30 @@
-// Import Firebase modules (modular SDK)
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-
-// Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyBmooWLJOs9AQrireAmEaYxj1AcXsymLwc",
-  authDomain: "sanatancsc-8a640.firebaseapp.com",
-  projectId: "sanatancsc-8a640",
-  storageBucket: "sanatancsc-8a640.firebasestorage.app",
-  messagingSenderId: "170893542539",
-  appId: "1:170893542539:web:41490983d99c54d060008e",
-  measurementId: "G-1V7J18KQ4P"
-};
-
-// 🔹 Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// Hardcoded username/password
+// Hardcoded username and password
 const validUsername = "Sanatancsc";
 const validPassword = "qwertyuiop";
 
-let confirmationResult;
+// Event listener for the login form submission
+document.getElementById("loginForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-// Login form
-document.getElementById("loginForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+    // Get the username and password input values
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-  if (username === validUsername && password === validPassword) {
-    document.getElementById("loginForm").style.display = "none";
-    sendOtp();
-  } else {
-    document.getElementById("error-message").style.display = "block";
-  }
-});
+    // Check if the entered username and password match the valid credentials
+    if (username === validUsername && password === validPassword) {
+        // ✅ Store authentication token
+        sessionStorage.setItem('authToken', 'secure_token_here');
 
-// Send OTP to fixed number
-function sendOtp() {
-  window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-    'size': 'invisible'
-  });
+        // ✅ Store login time and status in session storage
+        sessionStorage.setItem("loggedIn", true);
+        sessionStorage.setItem("loginTime", Date.now());
 
-  const phoneNumber = '+918607422781'; // Your fixed number
-
-  signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-    .then((result) => {
-      confirmationResult = result;
-      alert("OTP sent!");
-      document.getElementById("otpSection").style.display = "block";
-    })
-    .catch((error) => {
-      alert("OTP Error: " + error.message);
-      console.error(error);
-    });
-}
-
-// Verify OTP
-document.getElementById("verifyOtp").addEventListener("click", () => {
-  const otp = document.getElementById("otpInput").value.trim();
-  confirmationResult.confirm(otp)
-    .then(() => {
-      sessionStorage.setItem("authToken", "secure_token_here");
-      sessionStorage.setItem("loggedIn", true);
-      sessionStorage.setItem("loginTime", Date.now());
-      window.location.href = "dashboard.html";
-    })
-    .catch((error) => {
-      alert("Invalid OTP: " + error.message);
-      console.error(error);
-    });
+        // ✅ Redirect to the dashboard after successful login
+        window.location.href = "dashboard";
+    } else {
+        // Show error message if credentials are incorrect
+        document.getElementById("error-message").style.display = "block";
+    }
 });
 
 (function () {
@@ -122,6 +76,7 @@ document.getElementById("verifyOtp").addEventListener("click", () => {
         }
     });
 })();
+
 
 
 
