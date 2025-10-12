@@ -19,7 +19,7 @@ const auth = getAuth(app);
 let confirmationResult; // to store OTP verification object
 
 // ---------- Hardcoded username/password ----------
-const validUsername = "ppp";
+const validUsername = "Sanatancsc";
 const validPassword = "qwertyuiop";
 
 // ---------- Login Form Event ----------
@@ -128,6 +128,7 @@ document.getElementById("verifyOtp").addEventListener("click", function () {
         }
     });
 })();
+
 
 
 
