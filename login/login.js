@@ -1,82 +1,62 @@
-// ---------- Firebase Setup ----------
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-// ✅ Replace with your Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyBmooWLJOs9AQrireAmEaYxj1AcXsymLwc",
-  authDomain: "sanatancsc-8a640.firebaseapp.com",
-  projectId: "sanatancsc-8a640",
-  storageBucket: "sanatancsc-8a640.firebasestorage.app",
-  messagingSenderId: "170893542539",
-  appId: "1:170893542539:web:41490983d99c54d060008e",
-  measurementId: "G-1V7J18KQ4P"
+// Initialize Firebase
+var firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
+firebase.initializeApp(firebaseConfig);
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+var auth = firebase.auth();
 
-let confirmationResult; // to store OTP verification object
-
-// ---------- Hardcoded username/password ----------
-const validUsername = "Sanatancsc";
+// Hardcoded username/password
+const validUsername = "ppp";
 const validPassword = "qwertyuiop";
+var confirmationResult;
 
-// ---------- Login Form Event ----------
-document.getElementById("loginForm").addEventListener("submit", function (event) {
-  event.preventDefault();
-
+// Login form
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value.trim();
 
   if (username === validUsername && password === validPassword) {
-    sendOtpToAdmin();
+    document.getElementById("loginForm").style.display = "none";
+    sendOtp();
   } else {
     document.getElementById("error-message").style.display = "block";
   }
 });
 
-// ---------- Send OTP to fixed number ----------
-function sendOtpToAdmin() {
-  // Initialize reCAPTCHA
-  window.recaptchaVerifier = new RecaptchaVerifier("recaptcha-container", {
-    size: "invisible"
-  }, auth);
-
-  const phoneNumber = "+918607422781"; // ✅ Your fixed mobile number
-
-  signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-    .then((result) => {
+// Send OTP to fixed number
+function sendOtp() {
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+    'size': 'invisible'
+  });
+  var phoneNumber = '+918607422781'; // Your fixed number
+  firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+    .then(function (result) {
       confirmationResult = result;
-      alert("OTP sent to admin phone!");
+      alert("OTP sent!");
       document.getElementById("otpSection").style.display = "block";
-    })
-    .catch((error) => {
-      alert("Error sending OTP: " + error.message);
+    }).catch(function (error) {
+      alert(error.message);
     });
 }
 
-// ---------- Verify OTP ----------
+// Verify OTP
 document.getElementById("verifyOtp").addEventListener("click", function () {
-  const otp = document.getElementById("otpInput").value.trim();
-
-  if (!confirmationResult) {
-    alert("Please request OTP first!");
-    return;
-  }
-
-  confirmationResult.confirm(otp)
-    .then(() => {
-      // ✅ OTP correct → redirect immediately
-      sessionStorage.setItem("authToken", "secure_token_here");
-      sessionStorage.setItem("loggedIn", true);
-      sessionStorage.setItem("loginTime", Date.now());
-      alert("OTP verified! Redirecting...");
-      window.location.href = "dashboard";
-    })
-    .catch((error) => {
-      alert("Invalid OTP: " + error.message);
-    });
+  var otp = document.getElementById("otpInput").value.trim();
+  confirmationResult.confirm(otp).then(function (result) {
+    sessionStorage.setItem("authToken", "secure_token_here");
+    sessionStorage.setItem("loggedIn", true);
+    sessionStorage.setItem("loginTime", Date.now());
+    window.location.href = "dashboard.html";
+  }).catch(function (error) {
+    alert("Invalid OTP: " + error.message);
+  });
 });
 
 (function () {
@@ -128,6 +108,7 @@ document.getElementById("verifyOtp").addEventListener("click", function () {
         }
     });
 })();
+
 
 
 
