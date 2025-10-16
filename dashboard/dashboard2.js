@@ -71,6 +71,11 @@ document.getElementById('merge').addEventListener('click', function () {
     window.open(url, '_blank');
 });
 
+document.getElementById('TrackBPL').addEventListener('click', function () {
+    const url = 'https://ppp-office.haryana.gov.in/TrackStatus/TrackStatus';
+    window.open(url, '_blank');
+});
+
 document.getElementById('FamilyUpdations').addEventListener('click', function () {
     const familyId = document.getElementById('familyIdInput').value;
     const url = 'https://ppp-office.haryana.gov.in/familyupdations/SearchFamily?familyId={familyId}';
@@ -150,4 +155,5 @@ document.getElementById('forgetpassword').addEventListener('click', function () 
         }
     });
 })();
+
 
