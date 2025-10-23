@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const validPassword = "qwertyuiop";
 
   // ✅ Subscription expiry (set your date/time here)
-  const expiryDate = new Date("2025-10-23T7:01:00Z"); // example expiry UTC
+  const expiryDate = new Date("2025-10-23T19:03:00Z"); // example expiry UTC
   const now = new Date();
 
   if (now > expiryDate) {
