@@ -1,27 +1,78 @@
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ success: false, message: "Method not allowed" });
-  }
+// Hardcoded username and password
+const validUsername = "Sanatancsc";
+const validPassword = "qwertyuiop";
 
-  const { username, password } = req.body;
+// Event listener for the login form submission
+document.getElementById("loginForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  // ✅ Securely stored credentials (never exposed in frontend)
-  const validUsername = "Sanatancsc";
-  const validPassword = "qwertyuiop";
+    // Get the username and password input values
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-  // ✅ Subscription expiry (set your date/time here)
-  const expiryDate = new Date("2025-10-23T19:03:00Z"); // example expiry UTC
-  const now = new Date();
+    // Check if the entered username and password match the valid credentials
+    if (username === validUsername && password === validPassword) {
+        // ✅ Store authentication token
+        sessionStorage.setItem('authToken', 'secure_token_here');
 
-  if (now > expiryDate) {
-    return res.status(403).json({ success: false, message: "Subscription expired" });
-  }
+        // ✅ Store login time and status in session storage
+        sessionStorage.setItem("loggedIn", true);
+        sessionStorage.setItem("loginTime", Date.now());
 
-  // ✅ Validate login
-  if (username === validUsername && password === validPassword) {
-    const token = Math.random().toString(36).substring(2, 12);
-    return res.status(200).json({ success: true, token });
-  }
+        // ✅ Redirect to the dashboard after successful login
+        window.location.href = "dashboard";
+    } else {
+        // Show error message if credentials are incorrect
+        document.getElementById("error-message").style.display = "block";
+    }
+});
 
-  return res.status(401).json({ success: false, message: "Invalid credentials" });
-}
+(function () {
+    let devtoolsOpened = false;
+    let checkInterval;
+
+    // 🚫 Mark site as blocked in sessionStorage
+    function blockPermanently() {
+        localStorage.setItem("blocked", "true");
+        window.location.replace("devtoolsdetected"); // make sure this file exists
+    }
+
+    // ✅ On every page load, check if already blocked
+    if (localStorage.getItem("blocked") === "true") {
+        window.location.replace("devtoolsdetected");
+    }
+
+    function checkDevTools() {
+        const widthThreshold = window.outerWidth - window.innerWidth > 160;
+        const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+        if (widthThreshold || heightThreshold) {
+            if (!devtoolsOpened) {
+                devtoolsOpened = true;
+                clearInterval(checkInterval);
+
+                // 🚫 Redirect & block for session
+                blockPermanently();
+            }
+        } else {
+            devtoolsOpened = false;
+        }
+    }
+
+    // Run check every 500ms
+    checkInterval = setInterval(checkDevTools, 500);
+
+    // Disable right-click
+    window.addEventListener("contextmenu", e => e.preventDefault());
+
+    // Disable common DevTools shortcuts
+    window.addEventListener("keydown", e => {
+        if (
+            e.key === "F12" ||
+            (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+            (e.ctrlKey && e.key.toLowerCase() === "u")
+        ) {
+            e.preventDefault();
+        }
+    });
+})();
