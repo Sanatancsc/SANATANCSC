@@ -5,20 +5,22 @@ export default async function handler(req, res) {
 
   const { username, password } = req.body;
 
-  // Hardcoded credentials (same as frontend validation)
+  // Hardcoded credentials
   const validUsername = "Sanatancsc";
   const validPassword = "qwertyuiop";
 
-  // Validate
+  // Validate credentials
   if (username === validUsername && password === validPassword) {
-    // ✅ Token Creation
     const token = "secure_token_here";
 
-    // ✅ Server-side validation
-    res.setHeader("Set-Cookie", `authToken=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=3600`);
+    // ✅ Set secure cookie
+    res.setHeader(
+      "Set-Cookie",
+      `authToken=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=3600`
+    );
 
-    // ✅ Send JSON to frontend
-    return res.status(200).json({ success: true, token });
+    // ✅ Response to frontend
+    return res.status(200).json({ success: true });
   } else {
     return res.status(401).json({ success: false, message: "Invalid credentials" });
   }
