@@ -13,7 +13,7 @@ export default function handler(req, res) {
 
   if (!isValid) {
     // Not logged in → server-side redirect to login
-    res.writeHead(302, { Location: "/login/index.html", "Cache-Control": "no-store" });
+    res.writeHead(302, { Location: "/index.html", "Cache-Control": "no-store" });
     res.end();
     return;
   }
