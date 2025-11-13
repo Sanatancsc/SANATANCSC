@@ -1,20 +1,3 @@
-// 🔒 Server-side Auth Check
-(async () => {
-  try {
-    const res = await fetch("/api/check-auth");
-    const data = await res.json();
-
-    if (!data.authenticated) {
-      window.location.href = "/index.html";
-      return;
-    }
-  } catch (err) {
-    console.error("Auth check failed", err);
-    window.location.href = "/index.html";
-    return;
-  }
-})();
-
 // Automatically convert Family ID and Username input to uppercase as user types or pastes
 document.addEventListener('DOMContentLoaded', function () {
     const familyIdInput = document.getElementById('familyIdInput');
@@ -164,6 +147,7 @@ document.getElementById('forgetpassword').addEventListener('click', function () 
         }
     });
 })();
+
 
 
 
