@@ -1,28 +1,26 @@
 export default function handler(req, res) {
-  // Get cookies
   const cookieHeader = req.headers.cookie || "";
   const token = cookieHeader
-    .split(";")
+    ?.split(";")
     .map(c => c.trim())
     .find(c => c.startsWith("authToken="));
 
   const isValid = token && token.split("=")[1] === "secure_token_here";
 
   if (!isValid) {
-    // Not logged in → redirect to login page
+    // ❌ Not logged in → redirect to login page
     res.writeHead(302, {
-      "Location": "/index.html",
-      "Cache-Control": "no-store",
-      "Content-Type": "text/html; charset=utf-8",
+      Location: "/login/index.html",   // <-- redirect to your login folder
+      "Cache-Control": "no-store"
     });
-    res.end(`
-      <html><head><title>Redirecting...</title></head>
-      <body><h2>Redirecting to <a href="/index.html">login</a></h2></body></html>
-    `);
+    res.end();
     return;
   }
 
-  // Logged in → redirect to real dashboard
-  res.writeHead(302, { "Location": "/dashboard.html" });
+  // ✅ Logged in → serve actual dashboard
+  res.writeHead(302, {
+    Location: "/dashboard/index.html", // <-- your dashboard HTML file
+    "Cache-Control": "no-store"
+  });
   res.end();
 }
