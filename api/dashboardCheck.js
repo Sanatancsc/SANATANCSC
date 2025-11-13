@@ -8,18 +8,18 @@ export default function handler(req, res) {
   const isValid = token && token.split("=")[1] === "secure_token_here";
 
   if (!isValid) {
-    // ❌ Not logged in → redirect to login page
+    // ❌ Not logged in → redirect to login
     res.writeHead(302, {
-      Location: "/login/index.html",   // <-- redirect to your login folder
+      Location: "/login/index.html",
       "Cache-Control": "no-store"
     });
     res.end();
     return;
   }
 
-  // ✅ Logged in → serve actual dashboard
+  // ✅ Logged in → allow access
   res.writeHead(302, {
-    Location: "/dashboard/index.html", // <-- your dashboard HTML file
+    Location: "/dashboard/index.html",
     "Cache-Control": "no-store"
   });
   res.end();
