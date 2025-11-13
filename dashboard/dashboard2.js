@@ -1,11 +1,3 @@
-// 🔐 Authentication Check
-(function () {
-  const isLoggedIn = sessionStorage.getItem('authToken');
-  if (!isLoggedIn) {
-    window.location.href = '/index.html'; // Redirect if not logged in
-  }
-})();
-
 // Automatically convert Family ID and Username input to uppercase as user types or pastes
 document.addEventListener('DOMContentLoaded', function () {
     const familyIdInput = document.getElementById('familyIdInput');
@@ -155,5 +147,6 @@ document.getElementById('forgetpassword').addEventListener('click', function () 
         }
     });
 })();
+
 
 
