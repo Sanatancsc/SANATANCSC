@@ -1,14 +1,3 @@
-export default function handler(req, res) {
-  // Auth check
-  const cookieHeader = req.headers.cookie || "";
-  const tokenMatch = cookieHeader.match(/authToken=([^;]+)/);
-  const token = tokenMatch ? tokenMatch[1] : null;
-
-  if (!token) {
-    return res.status(401).send("Unauthorized");
-  }
-
-  const js = `
 // Automatically convert Family ID and Username input to uppercase as user types or pastes
 document.addEventListener('DOMContentLoaded', function () {
     const familyIdInput = document.getElementById('familyIdInput');
@@ -101,8 +90,8 @@ document.getElementById('forgetpassword').addEventListener('click', function () 
         alert('Please enter a username.');
         return; // Stop further execution
     }
-    const otpUrl = \`https://hrylabour.gov.in/home/sendBocwOtp/\${username}\`;
-    const resetUrl = \`https://hrylabour.gov.in/home/resetBocwPassword/mobile/\${username}\`;
+    const otpUrl = `https://hrylabour.gov.in/home/sendBocwOtp/${username}`;
+    const resetUrl = `https://hrylabour.gov.in/home/resetBocwPassword/mobile/${username}`;
     openUrlWithUsername(otpUrl, username);
     setTimeout(() => {
         openUrlWithUsername(resetUrl, username);
@@ -158,8 +147,3 @@ document.getElementById('forgetpassword').addEventListener('click', function () 
         }
     });
 })();
-`;
-
-  res.setHeader("Content-Type", "application/javascript");
-  return res.end(js);
-}
