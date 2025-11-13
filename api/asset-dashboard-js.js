@@ -13,7 +13,7 @@ export default function handler(req, res) {
   }
 
   // Read private JS
-  const filePath = path.join(process.cwd(), "private", "dashboard2.js");
+  const filePath = path.join(process.cwd(), "private", "dashboard.js");
   try {
     const js = fs.readFileSync(filePath, "utf8");
     res.setHeader("Content-Type", "application/javascript; charset=utf-8");
