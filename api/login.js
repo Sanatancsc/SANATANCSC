@@ -5,20 +5,21 @@ export default async function handler(req, res) {
 
   const { username, password } = req.body;
 
-  // Hardcoded credentials
+  // 🔐 Hardcoded valid credentials
   const validUsername = "Sanatancsc";
   const validPassword = "qwertyuiop";
 
+  // ✅ Validation
   if (username === validUsername && password === validPassword) {
-    const token = "secure_token_here"; // simple static token
+    const token = "secure_token_here";
 
-    // ✅ Set cookie
+    // ✅ Set secure cookie
     res.setHeader(
       "Set-Cookie",
-      `authToken=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=3600`
+      `authToken=${token}; Path=/; HttpOnly; Max-Age=3600; SameSite=Strict`
     );
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, message: "Login successful" });
   } else {
     return res.status(401).json({ success: false, message: "Invalid credentials" });
   }
