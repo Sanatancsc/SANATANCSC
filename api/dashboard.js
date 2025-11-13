@@ -6,13 +6,14 @@ export default function handler(req, res) {
   const tokenMatch = cookieHeader.match(/authToken=([^;]+)/);
   const token = tokenMatch ? tokenMatch[1] : null;
 
+  // ✅ अगर token valid नहीं है → redirect login
   if (token !== "secure_token_here") {
-    res.writeHead(302, { Location: "/index.html" });
+    res.writeHead(302, { Location: "/login/index.html" });
     res.end();
     return;
   }
 
-  // Serve private dashboard
+  // ✅ अगर valid है → dashboard page serve करो
   const filePath = path.join(process.cwd(), "dashboard", "index.html");
   const html = fs.readFileSync(filePath, "utf8");
 
