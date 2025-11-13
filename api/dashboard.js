@@ -1,26 +1,21 @@
+import fs from "fs";
+import path from "path";
+
 export default function handler(req, res) {
   const cookieHeader = req.headers.cookie || "";
-  const token = cookieHeader
-    ?.split(";")
-    .map(c => c.trim())
-    .find(c => c.startsWith("authToken="));
+  const tokenMatch = cookieHeader.match(/authToken=([^;]+)/);
+  const token = tokenMatch ? tokenMatch[1] : null;
 
-  const isValid = token && token.split("=")[1] === "secure_token_here";
-
-  if (!isValid) {
-    // ❌ Not logged in → redirect to login
-    res.writeHead(302, {
-      Location: "/login/index.html",
-      "Cache-Control": "no-store"
-    });
+  if (token !== "secure_token_here") {
+    res.writeHead(302, { Location: "/index.html" });
     res.end();
     return;
   }
 
-  // ✅ Logged in → allow access
-  res.writeHead(302, {
-    Location: "/dashboard/index.html",
-    "Cache-Control": "no-store"
-  });
-  res.end();
+  // Serve private dashboard
+  const filePath = path.join(process.cwd(), "dashboard", "index.html");
+  const html = fs.readFileSync(filePath, "utf8");
+
+  res.setHeader("Content-Type", "text/html");
+  res.end(html);
 }
