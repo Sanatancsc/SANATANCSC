@@ -5,7 +5,13 @@ export default function handler(req, res) {
     .map(c => c.trim())
     .find(c => c.startsWith("authToken="));
 
-  const isValid = token && token.split("=")[1] === "secure_token_here";
+  const tokenValue = token ? token.split("=")[1] : null;
+
+  // Check if token exists in memory
+  const isValid =
+    tokenValue &&
+    globalThis.activeTokens &&
+    globalThis.activeTokens.has(tokenValue);
 
   if (!isValid) {
     return res.status(200).json({ authenticated: false });
