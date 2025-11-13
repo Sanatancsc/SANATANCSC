@@ -6,7 +6,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     const password = document.getElementById("password").value.trim();
 
     try {
-        // 🔹 Call your Vercel API instead of hardcoded check
+        // 🔹 API Call
         const response = await fetch("/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -82,4 +82,5 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         }
     });
 })();
+
 
