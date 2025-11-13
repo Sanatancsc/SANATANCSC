@@ -1,13 +1,15 @@
-// ✅ LOGIN CHECK
+// 🔒 Server-side Auth Check
 (async () => {
   try {
     const res = await fetch("/api/check-auth");
     const data = await res.json();
+
     if (!data.authenticated) {
-      window.location.href = "/index.html"; // redirect if not logged in
+      window.location.href = "/index.html";
       return;
     }
-  } catch (e) {
+  } catch (err) {
+    console.error("Auth check failed", err);
     window.location.href = "/index.html";
     return;
   }
@@ -162,6 +164,7 @@ document.getElementById('forgetpassword').addEventListener('click', function () 
         }
     });
 })();
+
 
 
 
