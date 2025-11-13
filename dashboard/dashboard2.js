@@ -1,3 +1,18 @@
+// ✅ LOGIN CHECK
+(async () => {
+  try {
+    const res = await fetch("/api/check-auth");
+    const data = await res.json();
+    if (!data.authenticated) {
+      window.location.href = "/index.html"; // redirect if not logged in
+      return;
+    }
+  } catch (e) {
+    window.location.href = "/index.html";
+    return;
+  }
+})();
+
 // Automatically convert Family ID and Username input to uppercase as user types or pastes
 document.addEventListener('DOMContentLoaded', function () {
     const familyIdInput = document.getElementById('familyIdInput');
@@ -147,6 +162,7 @@ document.getElementById('forgetpassword').addEventListener('click', function () 
         }
     });
 })();
+
 
 
 
