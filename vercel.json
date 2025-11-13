@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/dashboard", "destination": "/api/dashboardCheck" }
+    { "source": "/dashboard", "destination": "/api/dashboardCheck" },
+    { "source": "/dashboard.html", "destination": "/api/dashboardCheck" }
   ]
 }
