@@ -1,6 +1,2 @@
 {
-  "rewrites": [
-    { "source": "/dashboard", "destination": "/api/dashboard" },
-    { "source": "/dashboard/", "destination": "/api/dashboard" }
-  ]
-}
+ 
