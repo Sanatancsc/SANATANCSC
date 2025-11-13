@@ -6,7 +6,7 @@ export function middleware(req) {
 
   // 🔐 अगर user dashboard खोल रहा है और login नहीं है
   if (pathname.startsWith("/dashboard") && token !== "secure_token_here") {
-    const loginUrl = new URL("/login/index.html", req.url);
+    const loginUrl = new URL("/index.html", req.url);
     return NextResponse.redirect(loginUrl);
   }
 
