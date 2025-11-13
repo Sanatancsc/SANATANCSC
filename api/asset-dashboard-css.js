@@ -8,7 +8,7 @@ export default function handler(req, res) {
   const token = tokenMatch ? tokenMatch[1] : null;
 
   if (!token) {
-    res.writeHead(302, { Location: "/login/index.html" });
+    res.writeHead(302, { Location: "/index.html" });
     return res.end();
   }
 
