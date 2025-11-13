@@ -8,13 +8,13 @@ export default function handler(req, res) {
 
   // If cookie exists → allow (simple login)
   if (!token) {
-    res.writeHead(302, { Location: "/login/index.html" });
+    res.writeHead(302, { Location: "/index.html" });
     res.end();
     return;
   }
 
   // Serve private dashboard
-  const filePath = path.join(process.cwd(), "private", "dashboard.html");
+  const filePath = path.join(process.cwd(), "private", "index.html");
   const html = fs.readFileSync(filePath, "utf8");
   res.writeHead(200, { "Content-Type": "text/html" });
   res.end(html);
