@@ -14,7 +14,7 @@ export default function handler(req, res) {
   }
 
   // Serve private dashboard
-  const filePath = path.join(process.cwd(), "dashboard", "index.html");
+  const filePath = path.join(process.cwd(), "private", "index.html");
   const html = fs.readFileSync(filePath, "utf8");
   res.writeHead(200, { "Content-Type": "text/html" });
   res.end(html);
