@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const familyIdInput = document.getElementById('familyIdInput');
     const usernameInput = document.getElementById('usernameInput');
+    const accountnoInput = document.getElementById('accountnoInput');
 
     if (familyIdInput) {
         familyIdInput.addEventListener('input', () => {
@@ -36,6 +37,15 @@ function openUrlWithUsername(urlTemplate, username) {
     }
 }
 
+// Helper function to handle Account No.-based link opening
+function openUrlWithAccountNo(urlTemplate, accountno) {
+    if (accountno) {
+        const formattedUrl = urlTemplate.replace('{accountno}', encodeURIComponent(accountno));
+        window.open(formattedUrl, '_blank');
+    } else {
+        alert('Please enter a Account No.');
+    }
+}
 // Event listeners for sidebar options
 document.getElementById('familyIdFinder').addEventListener('click', function () {
     const familyId = document.getElementById('familyIdInput').value;
@@ -51,6 +61,12 @@ document.getElementById('aadharLink').addEventListener('click', function () {
 document.getElementById('correctionModule').addEventListener('click', function () {
     const url = 'https://ppp-office.haryana.gov.in/CorrectionModule/SearchFamily';
     window.open(url, '_blank');
+});
+
+document.getElementById('Bill').addEventListener('click', function () {
+    const accountno = document.getElementById('accountnoInput').value;
+    const url = 'https://dhbvn.org.in/Rapdrp/BD?UID={accountno}';
+    openUrlWithFamilyId(url, accountno);
 });
 
 document.getElementById('split').addEventListener('click', function () {
