@@ -66,7 +66,7 @@ document.getElementById('correctionModule').addEventListener('click', function (
 document.getElementById('Bill').addEventListener('click', function () {
     const accountno = document.getElementById('accountnoInput').value;
     const url = 'https://dhbvn.org.in/Rapdrp/BD?UID={accountno}';
-    openUrlWithFamilyId(url, accountno);
+    openUrlWithAccountNo(url, accountno);
 });
 
 document.getElementById('split').addEventListener('click', function () {
