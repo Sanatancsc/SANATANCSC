@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   // Hardcoded credentials
   const validUsername = "Sanatancsc";
-  const validPassword = "Jatinbhau";
+  const validPassword = "qwertyuiop";
 
   // ✅ Login validation
   if (username === validUsername && password === validPassword) {
