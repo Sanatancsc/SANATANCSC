@@ -54,7 +54,7 @@ document.getElementById('familyIdFinder').addEventListener('click', function () 
 });
 
 document.getElementById('aadharLink').addEventListener('click', function () {
-    const url = 'https://ekshatipurti.haryana.gov.in';
+    const url = 'https://fasal.haryana.gov.in/home/login';
     window.open(url, '_blank');
 });
 
